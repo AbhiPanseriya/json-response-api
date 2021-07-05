@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { isAutheticated } from '../auth/Auth';
-const REACT_APP_SERVER = 'http://localhost:5000'
+const REACT_APP_SERVER = 'https://static-json-api.herokuapp.com/'
 export const http =  axios.create({
     baseURL: REACT_APP_SERVER,
 });
