@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { isAutheticated } from '../auth/Auth';
-const REACT_APP_SERVER = 'https://static-json-api.herokuapp.com/'
+import * as env from '../environment.json';
 export const http =  axios.create({
-    baseURL: REACT_APP_SERVER,
+    baseURL: env.REACT_APP_SERVER,
 });
 
 http.interceptors.request.use((config) => {

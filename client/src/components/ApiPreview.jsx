@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faChevronDown, faChevronUp, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router';
-
+import * as env from '../environment.json';
 
 const ClientSecretStatus = {
     NOT_REVEALED: 0,
@@ -24,7 +24,7 @@ const ApiPreview = ({ apiData, onApiDelete }) => {
             return;
         } else if (clientSecretStatus === ClientSecretStatus.COPY_TO_CLIPBOARD){
             setClientSecretStatus(ClientSecretStatus.COPIED);
-            copyTextToCliboard(apiData.clientSecret);
+            copyTextToCliboard(`${env.REACT_APP_SERVER}/v1/get/${apiData.clientSecret}`);
             setTimeout(() => {
                 setClientSecretStatus(ClientSecretStatus.REVEALED_BUT_NOT_COPIED);
             }, [5000]);
@@ -69,7 +69,7 @@ const ApiPreview = ({ apiData, onApiDelete }) => {
             </div>
             <div className='flex justify-between items-center'>
                 <div 
-                    className={`px-2 py-1 cursor-pointer rounded w-96 text-center text-sm transition-all
+                    className={`px-2 py-1 cursor-pointer rounded w-2/5 text-center text-sm transition-all
                         ${clientSecretStatus === ClientSecretStatus.NOT_REVEALED 
                             && 'bg-gray-400 text-gray-400 hover:bg-gray-300 hover:text-black'} 
                         ${(clientSecretStatus === ClientSecretStatus.REVEALED_BUT_NOT_COPIED || clientSecretStatus === ClientSecretStatus.COPY_TO_CLIPBOARD)
@@ -81,8 +81,8 @@ const ApiPreview = ({ apiData, onApiDelete }) => {
                     onMouseOver={onClientCodeHover}
                     onMouseLeave={onClientCodeHoverOut}
                 >
-                    {clientSecretStatus === ClientSecretStatus.NOT_REVEALED ? 'click here to reveal the secret token': ''}
-                    {clientSecretStatus === ClientSecretStatus.REVEALED_BUT_NOT_COPIED ? apiData.clientSecret : ''}
+                    {clientSecretStatus === ClientSecretStatus.NOT_REVEALED ? 'click here to reveal the api endpoint' : ''}
+                    {clientSecretStatus === ClientSecretStatus.REVEALED_BUT_NOT_COPIED ? `${env.REACT_APP_SERVER}/v1/get/${apiData.clientSecret}` : ''}
                     {clientSecretStatus === ClientSecretStatus.COPY_TO_CLIPBOARD ? 'copy to clipboard' : ''}
                     {clientSecretStatus === ClientSecretStatus.COPIED && ( 
                         <span className='flex items-center text-center justify-center'>

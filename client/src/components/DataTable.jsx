@@ -10,7 +10,7 @@ const DataTable = () => {
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
 
-    const loader = 'loading... ';
+    const loader = <div className='flex items-center justify-center w-full h-96'>Loading...</div>;
 
     const fetchData = async (p) => {
         try {

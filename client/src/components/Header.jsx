@@ -1,6 +1,6 @@
 import { googleLogout, isAutheticated } from "../auth/Auth";
 import { useHistory } from "react-router";
-
+import * as  env from '../environment.json';
 const Header = ({ isCreateNewClicked, setIsCreateNewClicked }) => {
     const user = isAutheticated();
     const history = useHistory();
@@ -11,6 +11,9 @@ const Header = ({ isCreateNewClicked, setIsCreateNewClicked }) => {
                 <img src="/logo.png" alt='' className="w-36 h-12 mr-2" />
             </div>
             <div className="flex items-center">
+                <a className='btn shadow-none bg-white mr-2 py-1 px-2' target="blank" href={env.DOCUMENTATION_LINK}>
+                    Docs
+                </a>
                 {
                     !isCreateNewClicked && (
                         <button
