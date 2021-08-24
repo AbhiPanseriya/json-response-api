@@ -166,9 +166,7 @@ app.get('/v1/get/:id', async (req, res) => {
     const token = req.params.id;
     if(!token) res.status(400).send('token required');
 
-    const response = await Data.findOne({
-        _id: token
-    });
+    const response = await Data.findById(token);
     if(!response) res.sendStatus(404);
 
     res.send(response.data);
