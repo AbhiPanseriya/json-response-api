@@ -24,7 +24,7 @@ const ApiPreview = ({ apiData, onApiDelete }) => {
             return;
         } else if (clientSecretStatus === ClientSecretStatus.COPY_TO_CLIPBOARD){
             setClientSecretStatus(ClientSecretStatus.COPIED);
-            copyTextToCliboard(`${env.REACT_APP_SERVER}/v1/get/${apiData.clientSecret}`);
+            copyTextToCliboard(`${env.REACT_APP_SERVER}/v1/get/${apiData._id}`);
             setTimeout(() => {
                 setClientSecretStatus(ClientSecretStatus.REVEALED_BUT_NOT_COPIED);
             }, [5000]);
@@ -82,7 +82,7 @@ const ApiPreview = ({ apiData, onApiDelete }) => {
                     onMouseLeave={onClientCodeHoverOut}
                 >
                     {clientSecretStatus === ClientSecretStatus.NOT_REVEALED ? 'click here to reveal the api endpoint' : ''}
-                    {clientSecretStatus === ClientSecretStatus.REVEALED_BUT_NOT_COPIED ? `${env.REACT_APP_SERVER}/v1/get/${apiData.clientSecret}` : ''}
+                    {clientSecretStatus === ClientSecretStatus.REVEALED_BUT_NOT_COPIED ? `${env.REACT_APP_SERVER}/v1/get/${apiData._id}` : ''}
                     {clientSecretStatus === ClientSecretStatus.COPY_TO_CLIPBOARD ? 'copy to clipboard' : ''}
                     {clientSecretStatus === ClientSecretStatus.COPIED && ( 
                         <span className='flex items-center text-center justify-center'>

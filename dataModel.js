@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuid');
 
 const dataSchema = mongoose.Schema({
     title: {
@@ -25,11 +24,6 @@ const dataSchema = mongoose.Schema({
         type: Date,
         require: true,
         default: new Date()
-    },
-    clientSecret: {
-        type: String,
-        require: true,
-        default: uuidv4()
     }
 });
 
