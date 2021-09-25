@@ -4,12 +4,14 @@ import PrivateRoute from './utils/PrivateRoute';
 import Home from './components/Home'
 import CreateNew from './components/CreateNew';
 import UpdateData from './components/UpdateData';
+import LandingPage from './components/LandingPage';
 
 function App() {
   return (
     <div className="App">
 		<BrowserRouter>
 			<Switch>
+                  <Route path='/home' exact component={LandingPage} />
 				<Route path='/auth' exact component={Auth} />
 				<PrivateRoute path="/create">
 					<CreateNew />

@@ -8,8 +8,7 @@ const OAUTH_CLIENT_ID="585613063764-j303gv2v4gu16orfantle0bqf475a1o3.apps.google
 const Auth = () => {
     const history = useHistory();
     if(isAutheticated()) history.push('/');
-    const [ failureMessage, setFailureMessage ] = useState('');
-    const [ staySignedIn, setStaySignedIn] = useState(false);
+    const [failureMessage, setFailureMessage] = useState('');
 
     const responseGoogleSuccess = (response) => {
         const userObject = {
@@ -26,7 +25,7 @@ const Auth = () => {
     }
 
     return (
-        <div className="h-screen w-screen flex items-center justify-center">
+        <div className="h-screen w-screen flex flex-col items-center justify-center">
             {
                 failureMessage ? failureMessage
                 : (
@@ -36,13 +35,8 @@ const Auth = () => {
                             buttonText="Continue with Google"
                             onSuccess={responseGoogleSuccess}
                             onFailure={responseGoogleFailure}
-                            cookiePolicy={'single_host_origin'}
-                            isSignedIn={staySignedIn}
-                        />
-                        <label className="mt-4 flex justify-center items-center">
-                            <span className="mr-2">Stay signed in</span>
-                        <input type="checkbox" value={staySignedIn} onChange={(e) => setStaySignedIn(e.target.value)} />
-                        </label>
+                                cookiePolicy={'single_host_origin'}
+                            />
                     </div>
                 )
             }
