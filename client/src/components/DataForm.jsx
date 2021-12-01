@@ -8,7 +8,7 @@ const DataForm = ({values, setValues, submitButtonText}) => {
 
     const [description, setDescription] = useState('');
 
-    const [data, setData] = useState('');
+    const [data, setData] = useState({});
     const [isDataValid, setIsDataValid] = useState(null);
 
     const monaco = useMonaco();
@@ -86,7 +86,7 @@ const DataForm = ({values, setValues, submitButtonText}) => {
                                 setData(JSON.parse(value));
                             }}
                             theme='mytheme'
-                            onValidate={(m) => (m.length > 0) ? setIsDataValid(false) : setIsDataValid(true)}
+                            onValidate={(m) => { console.log(m); (m.length > 0) ? setIsDataValid(false) : setIsDataValid(true) }}
                         />
                     </span>
                 </label>
@@ -96,9 +96,10 @@ const DataForm = ({values, setValues, submitButtonText}) => {
                     </div>
                     <div className="flex flex-grow">
                         <button
-                            className="btn flex-grow mr-2"
+                            className={`btn flex-grow mr-2 ${!isDataValid ? 'hover:bg-gray-100 hover:text-black hover:shadow-none' : ''}`}
                             type="submit"
                             onClick={(e) => onSubmitClicked(e)}
+                            disabled={!isDataValid}
                         >
                             {submitButtonText}
                         </button>
